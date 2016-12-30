@@ -1,7 +1,7 @@
 {
-  "name": "thinkful-react-starter",
+  "name": "gdp",
   "version": "0.0.1",
-  "description": "A React template",
+  "description": "GDP project",
   "main": "js/index.js",
   "scripts": {
     "start": "http-server -c-1 build",
@@ -14,6 +14,10 @@
     "mkdir": "mkdirp build",
     "clean:html": "rimraf build/index.html",
     "mkdir:html": "run-s mkdir",
+    "mkdir:json": "run-s mkdir",
+    "clean:json": "rimraf build/*.json",
+    "_build:json": "cpr data build/data",
+    "build:json": "run-s clean:json mkdir:json _build:json",
     "build:html": "run-s clean:html mkdir:html _build:html",
     "_build:html": "cpr index.html build/index.html",
     "watch:html": "run-s build:html _watch:html",
@@ -37,7 +41,7 @@
     "watch:assets": "run-s build:assets _watch:assets",
     "_watch:assets": "chokidar assets/**/* -c \"npm run build:assets\""
   },
-  "author": "Joe Turner <joe@oampo.co.uk>",
+  "author": "Anika Tabassum",
   "license": "UNLICENSED",
   "devDependencies": {
     "babel-cli": "^6.11.4",
@@ -61,6 +65,9 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "d3": "^4.4.0",
+    "d3plus": "^1.9.8",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
