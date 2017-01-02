@@ -1,5 +1,3 @@
-//require('babel-polyfill');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -14,7 +12,6 @@ class TreeMap extends React.Component{
   }
   loadCountryByContinent(callback){
     this.props.dispatch(loadCountries())
-    // axios.get('/data/countries.json', {
     .then(callback)
     .catch(function(error){
       console.log(error);
@@ -24,7 +21,6 @@ class TreeMap extends React.Component{
     let histogram = this;
     
     this.loadCountryByContinent(function(response){
-      // histogram.countries = response.data.countries;
       // histogram.full_continents = response.data.continents;
       histogram.props.dispatch(loadGDPData())
       .then(function (response) {
@@ -90,6 +86,4 @@ var mapStateToProps = function(state, props) {
 };
 
 var Container = connect(mapStateToProps)(TreeMap);
-
-
 module.exports = Container;
