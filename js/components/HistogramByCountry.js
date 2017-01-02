@@ -75,6 +75,7 @@ class HistogramByCountry extends React.Component{
       .container("#vizhist")
       .data(this.data)
       .type("bar")
+      .aggs({"value":"mean"})
       .color("continent")
       .id(["continent","country"])
       .x("date")
