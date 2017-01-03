@@ -15,7 +15,7 @@ class App extends React.Component{
   render(){
     return(
       <div className="container">
-        <h1>GDP Comparison by Continent</h1>
+        <h1 className="text-center">GDP Comparison by Continent</h1>
         <TreeMap />
         <HistogramByCountry />
 

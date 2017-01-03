@@ -4,7 +4,6 @@ import {Panel, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 import {loadCountries, loadGDPData} from '../actions/index';
 var connect = require('react-redux').connect;
-//var Panel = ReactBootstrap.Panel;
 
 class TreeMap extends React.Component{
   constructor(props){
