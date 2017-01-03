@@ -1,6 +1,5 @@
 import axios from 'axios';
 export const LOAD_COUNTRIES = 'LOAD_COUNTRIES';
-
 export function loadCountries() {
   return {
     type: LOAD_COUNTRIES,
@@ -9,7 +8,6 @@ export function loadCountries() {
 }
 
 export const LOAD_GDP_DATA = 'LOAD_GDP_DATA';
-
 export function loadGDPData() {
   return {
     type: LOAD_GDP_DATA,

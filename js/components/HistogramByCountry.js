@@ -3,6 +3,7 @@
 //var actions = require('./actions/index');
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Panel, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 
 class HistogramByCountry extends React.Component{
@@ -22,7 +23,6 @@ class HistogramByCountry extends React.Component{
   componentWillMount(){
     let histogram = this;
     this.loadCountryByContinent(function(response){
-      //
       histogram.countries = response.data.countries;
       histogram.full_continents = response.data.continents;
 
@@ -35,7 +35,6 @@ class HistogramByCountry extends React.Component{
       .catch(function (error) {
         console.log(error);
       });
-      //
     }); 
   }
 
@@ -82,6 +81,7 @@ class HistogramByCountry extends React.Component{
       .y("value")
       .height(400)
       .width(1100)
+      .resize(true)
       .draw();
     }
     
@@ -93,11 +93,21 @@ class HistogramByCountry extends React.Component{
     }
     return(
       <div>
-        <select name="years" id="" onChange={this.updateYear}><option value="">Select Year</option>{years}</select>
-        <div id="vizhist"></div>
+        <Row>
+          <Col sm={12}>
+            <Panel header={title}>
+              <select name="years" id="" onChange={this.updateYear}><option value="">Select Year</option>{years}</select>
+              <div id="vizhist"></div>
+            </Panel>
+          </Col>
+        </Row>
       </div>
     );
   }  
 }
+
+const title = (
+  <h3>Histogram</h3>
+);
 
 module.exports = HistogramByCountry;

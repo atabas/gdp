@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Panel, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 import {loadCountries, loadGDPData} from '../actions/index';
 var connect = require('react-redux').connect;
+//var Panel = ReactBootstrap.Panel;
 
 class TreeMap extends React.Component{
   constructor(props){
@@ -66,17 +68,29 @@ class TreeMap extends React.Component{
       .time({"value": "date", "solo": "2015"})
       .height(400)
       .width(1100)
+      .resize(true)
       .draw();
     }  
   }
   render(){
     return(
       <div>
-        <div id="viz"></div>
+        <Row className>
+          <Col sm={12}>
+            <Panel header={title}>
+              <div id="viz"></div>
+            </Panel>
+          </Col>
+        </Row>
       </div>
     );
   }  
 }
+
+const title = (
+  <h3>Tree Map</h3>
+);
+
 
 var mapStateToProps = function(state, props) {
   return {

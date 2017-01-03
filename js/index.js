@@ -11,13 +11,11 @@ var TreeMap = require('./components/TreeMap');
 var HistogramByCountry = require('./components/HistogramByCountry');
 var TwoCountriesComparison = require('./components/TwoCountriesComparison');
 
-
 class App extends React.Component{
   render(){
     return(
-      <div>
+      <div className="container">
         <h1>GDP Comparison by Continent</h1>
-        
         <TreeMap />
         <HistogramByCountry />
 
