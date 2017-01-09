@@ -5,6 +5,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Panel, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
+import {loadCountries, loadGDPData} from '../actions/index';
+var connect = require('react-redux').connect;
 
 class HistogramByCountry extends React.Component{
   constructor(props){
@@ -14,8 +16,8 @@ class HistogramByCountry extends React.Component{
     this.state={ year: "2015"};
   }
   loadCountryByContinent(callback){
-    axios.get('/data/countries.json', {
-    }).then(callback)
+   this.props.dispatch(loadCountries())
+   .then(callback)
     .catch(function(error){
       console.log(error);
     });
@@ -23,13 +25,11 @@ class HistogramByCountry extends React.Component{
   componentWillMount(){
     let histogram = this;
     this.loadCountryByContinent(function(response){
-      histogram.countries = response.data.countries;
-      histogram.full_continents = response.data.continents;
+      histogram.props.dispatch(loadGDPData())
 
       axios.get('/data/gdp_data.json', {
       })
       .then(function (response) {
-        histogram.completeData = response.data[1];
         histogram.updateChart(histogram.state.year);
         })
       .catch(function (error) {
@@ -44,14 +44,14 @@ class HistogramByCountry extends React.Component{
   }
   updateChart(year){
     let histogram = this;
-    this.data = this.completeData.filter(function(el){
-      if(histogram.countries[el.country.id] && el.value && (!year || el.date==year) && isNaN(el.country.id.split('')[1]) && isNaN(el.country.id.split('')[0]) && el.country.id.split('')[0]!=='X'){
+    this.data = this.props.gdp_data.filter(function(el){
+      if(histogram.props.countries.countries[el.country.id] && el.value && (!year || el.date==year) && isNaN(el.country.id.split('')[1]) && isNaN(el.country.id.split('')[0]) && el.country.id.split('')[0]!=='X'){
         return el;
       }
     }).map(function(objs){
       let continent = null;
-      if(histogram.countries[objs.country.id]){
-        continent = histogram.full_continents[histogram.countries[objs.country.id].continent];
+      if(histogram.props.countries.countries[objs.country.id]){
+        continent = histogram.props.countries.continents[histogram.props.countries.countries[objs.country.id].continent];
       }
       else{
         console.log(objs.country);
@@ -110,4 +110,12 @@ const title = (
   <h3>Histogram</h3>
 );
 
-module.exports = HistogramByCountry;
+var mapStateToProps = function(state, props) {
+  return {
+    countries:state.countries,
+    gdp_data: state.gdp_data
+  };
+};
+
+var Container = connect(mapStateToProps)(HistogramByCountry);
+module.exports = Container;
