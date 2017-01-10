@@ -4,7 +4,7 @@
   "description": "GDP project",
   "main": "js/index.js",
   "scripts": {
-    "start": "http-server -c-1 build",
+    "start": "node js/server.js",
     "dev": "run-p watch serve",
     "test": "mocha --recursive --compilers js:babel-core/register",
     "build": "run-s build:*",
@@ -68,6 +68,7 @@
     "axios": "^0.15.3",
     "d3": "^4.4.0",
     "d3plus": "^1.9.8",
+    "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.3.1",
     "react-bootstrap": "^0.30.7",
