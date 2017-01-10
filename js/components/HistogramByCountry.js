@@ -3,7 +3,7 @@
 //var actions = require('./actions/index');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Panel, Col, Row} from 'react-bootstrap';
+import {Panel, Col, Row, DropdownButton, MenuItem} from 'react-bootstrap';
 import axios from 'axios';
 import {loadCountries, loadGDPData} from '../actions/index';
 var connect = require('react-redux').connect;
@@ -38,9 +38,9 @@ class HistogramByCountry extends React.Component{
     }); 
   }
 
-  updateYear(event){
-    this.setState({year: event.target.value});
-    this.updateChart(event.target.value);
+  updateYear(value){
+    this.setState({year: value});
+    this.updateChart(value);
   }
   updateChart(year){
     let histogram = this;
@@ -89,14 +89,17 @@ class HistogramByCountry extends React.Component{
   render(){
     let years= []
     for(var i =2000; i<= 2015; i++){
-      years.push(<option key={i} value={i}>{i}</option>)
+      years.push(<MenuItem eventKey={i} value={i}>{i}</MenuItem>)
     }
     return(
       <div>
         <Row>
           <Col sm={12}>
             <Panel header={title}>
-              <select name="years" id="" onChange={this.updateYear}><option value="">Select Year</option>{years}</select>
+              <DropdownButton onSelect={this.updateYear} name="years" title="Dropdown" id="bg-nested-dropdown">
+                {years}
+              </DropdownButton>
+              
               <div id="vizhist"></div>
             </Panel>
           </Col>
