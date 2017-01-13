@@ -96,7 +96,7 @@ class HistogramByCountry extends React.Component{
         <Row>
           <Col sm={12}>
             <Panel header={title}>
-              <DropdownButton onSelect={this.updateYear} name="years" title="Dropdown" id="bg-nested-dropdown">
+              <DropdownButton onSelect={this.updateYear} name="years" title="Select Year" id="bg-nested-dropdown">
                 {years}
               </DropdownButton>
               
