@@ -44,18 +44,14 @@ class TwoCountriesComparison extends React.Component{
 
   updateChart(country_selected){
     let chart = this;
-    console.log("selected: ",country_selected);
 
     chart.setState({ test: [...chart.state.test, country_selected]})
 
-    console.log("state chips is", chart.state.chips);
     this.data = this.props.gdp_data.filter(function(el){
       var found = country_selected.filter(function(item){
         return item == el.country.value;
       });
-      //if(chart.props.countries.countries[el.country.id]){
       if(found.length > 0){
-        console.log("found is: ", found);
         return el;
       }
     }).map(function(objs){
@@ -106,16 +102,6 @@ class TwoCountriesComparison extends React.Component{
       <div>
         <h1 className="text-center">GDP Comparison by Country</h1>
         {chips}
-        {/*<DropdownButton onSelect={this.updateFirstCountry} name="country_1" title="Select 1st Country" class="country-dropdown">
-          {countries}
-        </DropdownButton>
-
-        <DropdownButton onSelect={this.updateSecondCountry} name="country_2" title="Select 2nd Country" class="country-dropdown">
-          {countries}
-        </DropdownButton>*/}
-        
-        
-
         <br/>
         <div id="viz_comparison"></div>
       </div>
